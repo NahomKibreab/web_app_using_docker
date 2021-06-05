@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-
+const PORT = 3000;
+const HOST = '0.0.0.0';
 app.engine('ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
 
 // getting-started.js
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/dockerDB', {
+mongoose.connect('mongodb://mongo:27017/dockerDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -42,6 +42,5 @@ app.get('/', async (req, res) => {
   res.render('home', { data });
 });
 
-app.listen(port, () => {
-  console.log(`app listening at http://localhost:${port}`);
-});
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
